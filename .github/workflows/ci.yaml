@@ -20,7 +20,7 @@ jobs:
         env:
             API_KEY: ${{ secrets.API_KEY }}
         run: |
-          sed -i 's/^apiKey=.*/apiKey=${API_KEY}/' src/test/resources/config.properties
+          sed -i 's/^apiKey=.*/apiKey=${API_KEY}/' src/main/resources/config.properties
 
       - name: Run tests
         run: mvn clean test
