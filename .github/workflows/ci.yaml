@@ -20,7 +20,10 @@ jobs:
         env:
             API_KEY: ${{ secrets.API_KEY }}
         run: |
-          sed -i 's/^apiKey=.*/apiKey=${API_KEY}/' src/main/resources/config.properties
+          sed -i "s/^apiKey[[:space:]]*=[[:space:]]*.*/apiKey=${API_KEY}/" src/main/resources/config.properties
+
+      - name: Show first 10 lines of config.properties
+        run: head -n 10 src/main/resources/config.properties
 
       - name: Show apiKey from config.properties
         run: |
