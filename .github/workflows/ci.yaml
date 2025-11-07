@@ -22,12 +22,5 @@ jobs:
         run: |
           sed -i "s/^apiKey[[:space:]]*=[[:space:]]*.*/apiKey=${API_KEY}/" src/main/resources/config.properties
 
-      - name: Show first 10 lines of config.properties
-        run: head -n 10 src/main/resources/config.properties
-
-      - name: Show apiKey from config.properties
-        run: |
-          grep '^apiKey=' src/main/resources/config.properties | sed 's/apiKey=\(.\{0,4\}\).*/apiKey=\1****/'
-
       - name: Run tests
         run: mvn clean test
