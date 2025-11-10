@@ -5,8 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * CRUD test cases for Pet API operations.
+ */
 public class PetCRUDTest extends BaseApiTest{
 
+    // Test to read a non-existing pet (to make sure the pet does not exist before CRUD operations)
     @Test
     public void testReadNonExistingPet() {
         long nonExistingPetId = 4;
@@ -19,6 +23,7 @@ public class PetCRUDTest extends BaseApiTest{
 
     }
 
+    // Test to create a new pet
     @Test
     public void testCreateNewPet() {
         PetApiClient petApiClient = new PetApiClient(requestSpec);
@@ -32,11 +37,12 @@ public class PetCRUDTest extends BaseApiTest{
                 .extract()
                 .as(Pet.class);
 
-        assertEquals(testPetData.getId(), createdPet.getId());
-        assertEquals(testPetData.getName(), createdPet.getName());
-        assertEquals(testPetData.getStatus(), createdPet.getStatus());
+        assertEquals(testPetData.getId(), createdPet.getId(), "Pet ID does not match");
+        assertEquals(testPetData.getName(), createdPet.getName(), "Pet name does not match");
+        assertEquals(testPetData.getStatus(), createdPet.getStatus(), "Pet status does not match");
     }
 
+    // Test to update the newly added pet
     @Test
     public void testUpdateExistingPet() {
         PetApiClient petApiClient = new PetApiClient(requestSpec);
@@ -57,10 +63,11 @@ public class PetCRUDTest extends BaseApiTest{
                 .extract()
                 .as(Pet.class);
 
-        assertEquals("UpdatedName", updatedPet.getName());
-        assertEquals(models.Status.sold, updatedPet.getStatus());
+        assertEquals("UpdatedName", updatedPet.getName(), "Pet name was not updated");
+        assertEquals(models.Status.sold, updatedPet.getStatus(), "Pet status was not updated");
     }
 
+    // Test to delete the pet
     @Test
     public void testDeleteExistingPet() {
         PetApiClient petApiClient = new PetApiClient(requestSpec);
@@ -72,6 +79,7 @@ public class PetCRUDTest extends BaseApiTest{
                 .then()
                 .statusCode(200);
 
+        // Verify the pet has been deleted
         petApiClient.getPetById(testPetData.getId())
                 .then()
                 .body(equalTo("Pet not found"))

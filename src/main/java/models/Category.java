@@ -1,12 +1,17 @@
 package models;
 
+/**
+ * Class representing a category of a pet.
+ */
 public class Category {
     private long id;
     private String name;
 
+    // Default constructor
     public Category() {
     }
 
+    // Parameterized constructor
     public Category(long id, String name) {
         this.id = id;
         this.name = name;

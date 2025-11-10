@@ -1,12 +1,17 @@
 package models;
 
+/**
+ * Class representing a tag associated with a pet.
+ */
 public class Tag {
     private long id;
     private String name;
 
+    // Default constructor
     public Tag() {
     }
 
+    // Parameterized constructor
     public Tag(long id, String name) {
         this.id = id;
         this.name = name;

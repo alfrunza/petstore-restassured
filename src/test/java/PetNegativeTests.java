@@ -4,8 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
+/*
+ * Negative test cases for Pet API operations.
+ */
 public class PetNegativeTests extends BaseApiTest{
 
+    // Test to read a non-existing pet
     @Test
     public void testReadNonExistingPet() {
         long nonExistingPetId = 999999;
@@ -18,6 +22,7 @@ public class PetNegativeTests extends BaseApiTest{
 
     }
 
+    // Test to delete a non-existing pet
     @Test
     public void testDeleteNonExistingPet() {
         long nonExistingPetId = 999999;
@@ -29,6 +34,7 @@ public class PetNegativeTests extends BaseApiTest{
                 .statusCode(404);
     }
 
+    // Test to create a pet with invalid data
     @Test
     public void testCreatePetWithInvalidData() {
         PetApiClient petApiClient = new PetApiClient(requestSpec);
@@ -43,6 +49,7 @@ public class PetNegativeTests extends BaseApiTest{
                 .statusCode(400);
     }
 
+    // Test to update a non-existing pet
     @Test
     public void testUpdateNonExistingPet() {
         PetApiClient petApiClient = new PetApiClient(requestSpec);
