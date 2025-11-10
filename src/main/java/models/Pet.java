@@ -2,6 +2,9 @@ package models;
 
 import java.util.List;
 
+/**
+ * Class representing a pet.
+ */
 public class Pet {
     private long id;
     private String name;
@@ -10,9 +13,11 @@ public class Pet {
     private List<Tag> tags;
     private Status status;
 
+    // Default constructor
     public Pet() {
     }
 
+    // Parameterized constructor
     public Pet(long id, String name, Category category, String[] photoUrls, List<Tag> tags, Status status) {
         this.id = id;
         this.name = name;

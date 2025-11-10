@@ -6,10 +6,23 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.io.InputStream;
 
+/* Even though BaseTest is not usually located in the test package,
+   for this example it is placed here to facilitate access to test resources
+   and for clarity in the testing context.
+*/
+
+/**
+ * Base class for API tests, providing common setup and test data.
+ */
 public class BaseApiTest {
     protected static Pet testPetData;
     protected RequestSpecification requestSpec;
 
+    /**
+     * Initializes test data from a JSON file before all tests.
+     *
+     * @throws Exception if there is an error reading the test data
+     */
     @BeforeAll
     public static void initTestData() throws Exception {
         try (InputStream is = BaseApiTest.class.getClassLoader().getResourceAsStream("testData.json")) {
@@ -22,6 +35,9 @@ public class BaseApiTest {
         }
     }
 
+    /**
+     * Sets up the request specification before each test.
+     */
     @BeforeEach
     public void setup() {
         requestSpec = io.restassured.RestAssured.given()
